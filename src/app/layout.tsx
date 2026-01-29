@@ -1,0 +1,33 @@
+import type { Metadata } from 'next';
+import './globals.css';
+import Header from '@/components/layout/Header';
+import Footer from '@/components/layout/Footer';
+
+export const metadata: Metadata = {
+  title: 'iLoveQR - Free QR Code Generator',
+  description: 'Create custom QR codes instantly. Simple, fast, and free. Generate QR codes for URLs, text, email, phone, WiFi, and more.',
+  keywords: 'QR code, QR generator, free QR code, custom QR code, QR code maker',
+  openGraph: {
+    title: 'iLoveQR - Free QR Code Generator',
+    description: 'Create custom QR codes instantly. Simple, fast, and free.',
+    type: 'website',
+  },
+};
+
+export default function RootLayout({
+  children,
+}: {
+  children: React.ReactNode;
+}) {
+  return (
+    <html lang="en">
+      <body className="min-h-screen flex flex-col">
+        <Header />
+        <main className="flex-1">
+          {children}
+        </main>
+        <Footer />
+      </body>
+    </html>
+  );
+}
