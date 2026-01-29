@@ -421,7 +421,7 @@ export default function QRPreviewPanel({
                 onClick={() => handleDownload('svg')}
                 loading={downloading === 'svg'}
                 className="text-xs"
-                disabled={hasBackgroundImage || hasTextOverlay}
+                disabled={Boolean(hasBackgroundImage || hasTextOverlay)}
                 title={hasBackgroundImage || hasTextOverlay ? 'SVG not available with images or text' : ''}
               >
                 <FileCode className="w-4 h-4" />
