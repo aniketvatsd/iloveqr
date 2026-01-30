@@ -432,9 +432,14 @@ export default function QRPreviewPanel({
         </div>
 
         <div className="p-4 border-t border-border">
-          <button className="w-full flex items-center justify-center gap-2 py-3 text-text-secondary hover:text-text-primary transition-colors">
-            <span>Track Your QR Code</span>
-            <BarChart3 className="w-5 h-5" />
+          <button className="w-full flex flex-col items-center justify-center gap-1 py-3 text-text-secondary hover:text-text-primary transition-colors cursor-not-allowed opacity-70">
+            <div className="flex items-center gap-2">
+              <span>Track Your QR Code</span>
+              <BarChart3 className="w-5 h-5" />
+            </div>
+            <span className="text-xs text-primary font-medium px-2 py-0.5 bg-primary/10 rounded-full">
+              Upcoming
+            </span>
           </button>
         </div>
       </div>

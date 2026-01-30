@@ -1,5 +1,5 @@
 import Link from 'next/link';
-import { QrCode, Github, Twitter, Linkedin } from 'lucide-react';
+import { QrCode, Twitter, Linkedin, Instagram } from 'lucide-react';
 
 export default function Footer() {
   return (
@@ -48,6 +48,11 @@ export default function Footer() {
                 </Link>
               </li>
               <li>
+                <Link href="/contact" className="text-text-secondary hover:text-text-primary transition-colors text-sm">
+                  Contact
+                </Link>
+              </li>
+              <li>
                 <Link href="/privacy" className="text-text-secondary hover:text-text-primary transition-colors text-sm">
                   Privacy Policy
                 </Link>
@@ -65,21 +70,27 @@ export default function Footer() {
             <h4 className="font-semibold text-text-primary mb-4">Connect</h4>
             <div className="flex gap-3">
               <a
-                href="#"
+                href="https://www.instagram.com/iloveqr.in/"
+                target="_blank"
+                rel="noopener noreferrer"
                 className="p-2 bg-surface-light hover:bg-surface-lighter rounded-lg transition-colors"
-                aria-label="Twitter"
+                aria-label="Instagram"
+              >
+                <Instagram className="w-5 h-5 text-text-secondary" />
+              </a>
+              <a
+                href="https://x.com/iloveqr196976"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="p-2 bg-surface-light hover:bg-surface-lighter rounded-lg transition-colors"
+                aria-label="X (Twitter)"
               >
                 <Twitter className="w-5 h-5 text-text-secondary" />
               </a>
               <a
-                href="#"
-                className="p-2 bg-surface-light hover:bg-surface-lighter rounded-lg transition-colors"
-                aria-label="GitHub"
-              >
-                <Github className="w-5 h-5 text-text-secondary" />
-              </a>
-              <a
-                href="#"
+                href="http://www.linkedin.com/in/iloveqr-in"
+                target="_blank"
+                rel="noopener noreferrer"
                 className="p-2 bg-surface-light hover:bg-surface-lighter rounded-lg transition-colors"
                 aria-label="LinkedIn"
               >
