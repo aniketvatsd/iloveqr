@@ -16,12 +16,12 @@ interface QRPreviewPanelProps {
 
 type DownloadFormat = 'png' | 'svg' | 'jpeg';
 
-export default function QRPreviewPanel({ 
-  content, 
-  design, 
+export default function QRPreviewPanel({
+  content,
+  design,
   styleMode,
-  onQRReady, 
-  qrCodeInstance 
+  onQRReady,
+  qrCodeInstance
 }: QRPreviewPanelProps) {
   const containerRef = useRef<HTMLDivElement>(null);
   const canvasContainerRef = useRef<HTMLDivElement>(null);
@@ -37,11 +37,11 @@ export default function QRPreviewPanel({
 
     const fgHex = design.dotColor.replace('#', '');
     const bgHex = design.backgroundColor.replace('#', '');
-    
+
     const fgLum = parseInt(fgHex, 16);
     const bgLum = parseInt(bgHex, 16);
     const contrast = Math.abs(fgLum - bgLum) / 16777215;
-    
+
     if (contrast < 0.5) {
       score -= 20;
     } else if (contrast < 0.7) {
@@ -120,7 +120,7 @@ export default function QRPreviewPanel({
           imageSize: design.logoSize,
           hideBackgroundDots: true,
         },
-        image: styleMode === 'custom' && design.logo ? design.logo : undefined,
+        image: design.logo || undefined,
         margin: design.margin,
         qrOptions: {
           errorCorrectionLevel: 'H',
@@ -129,7 +129,7 @@ export default function QRPreviewPanel({
 
       qrCode.append(containerRef.current);
       qrCodeRef.current = qrCode;
-      
+
       if (onQRReady) {
         onQRReady(qrCode);
       }
@@ -154,7 +154,7 @@ export default function QRPreviewPanel({
         if (hasBackgroundImage && design.backgroundImage) {
           const bgImg = new window.Image();
           bgImg.crossOrigin = 'anonymous';
-          
+
           await new Promise<void>((resolve, reject) => {
             bgImg.onload = () => {
               const zoom = design.backgroundImageZoom / 100;
@@ -162,7 +162,7 @@ export default function QRPreviewPanel({
               const imgHeight = size * zoom;
               const offsetX = (size - imgWidth) / 2;
               const offsetY = (size - imgHeight) / 2;
-              
+
               ctx.globalAlpha = design.backgroundImageOpacity / 100;
               ctx.drawImage(bgImg, offsetX, offsetY, imgWidth, imgHeight);
               ctx.globalAlpha = 1;
@@ -185,7 +185,7 @@ export default function QRPreviewPanel({
           const svgData = new XMLSerializer().serializeToString(svgElement);
           const svgBlob = new Blob([svgData], { type: 'image/svg+xml;charset=utf-8' });
           const svgUrl = URL.createObjectURL(svgBlob);
-          
+
           const qrImg = new window.Image();
           await new Promise<void>((resolve, reject) => {
             qrImg.onload = () => {
@@ -218,21 +218,21 @@ export default function QRPreviewPanel({
 
   const drawTextOverlay = (ctx: CanvasRenderingContext2D, size: number) => {
     const { text, font, fontSize, fontWeight, color, letterSpacing } = design.textOverlay;
-    
+
     const scaledFontSize = (fontSize / 100) * (size * 0.15);
-    
+
     ctx.save();
     ctx.fillStyle = color;
     ctx.font = `${fontWeight} ${scaledFontSize}px ${font}, sans-serif`;
     ctx.textAlign = 'center';
     ctx.textBaseline = 'middle';
-    
+
     if (letterSpacing > 0) {
       const chars = text.split('');
       const totalWidth = chars.reduce((acc, char) => acc + ctx.measureText(char).width + letterSpacing * (size / 280), 0) - letterSpacing * (size / 280);
       let x = (size - totalWidth) / 2;
       const y = size / 2;
-      
+
       chars.forEach((char) => {
         ctx.fillText(char, x + ctx.measureText(char).width / 2, y);
         x += ctx.measureText(char).width + letterSpacing * (size / 280);
@@ -240,29 +240,29 @@ export default function QRPreviewPanel({
     } else {
       ctx.fillText(text, size / 2, size / 2);
     }
-    
+
     ctx.restore();
   };
 
   const getScannabilityInfo = () => {
     if (scannability >= 75) {
-      return { 
-        level: 'high', 
-        label: 'High Scannability', 
+      return {
+        level: 'high',
+        label: 'High Scannability',
         color: 'text-green-400',
         bgColor: 'bg-green-500'
       };
     } else if (scannability >= 50) {
-      return { 
-        level: 'medium', 
-        label: 'Medium Scannability', 
+      return {
+        level: 'medium',
+        label: 'Medium Scannability',
         color: 'text-yellow-400',
         bgColor: 'bg-yellow-500'
       };
     } else {
-      return { 
-        level: 'low', 
-        label: 'Low Scannability', 
+      return {
+        level: 'low',
+        label: 'Low Scannability',
         color: 'text-red-400',
         bgColor: 'bg-red-500'
       };
@@ -300,17 +300,17 @@ export default function QRPreviewPanel({
 
         <div className="p-6">
           <div className="flex justify-center mb-6">
-            <div 
+            <div
               ref={canvasContainerRef}
               className="rounded-2xl overflow-hidden relative"
-              style={{ 
-                width: 280, 
+              style={{
+                width: 280,
                 height: 280,
                 boxShadow: hasBackgroundImage ? '0 8px 32px rgba(0,0,0,0.3)' : 'none'
               }}
             >
               {hasBackgroundImage && (
-                <div 
+                <div
                   className="absolute inset-0"
                   style={{
                     backgroundImage: `url(${design.backgroundImage})`,
@@ -323,16 +323,16 @@ export default function QRPreviewPanel({
               )}
 
               {hasTextOverlay && design.textOverlay.position === 'back' && (
-                <div 
+                <div
                   className="absolute inset-0 flex items-center justify-center pointer-events-none"
                   style={textPreviewStyle}
                 >
                   {design.textOverlay.text}
                 </div>
               )}
-              
-              <div 
-                ref={containerRef} 
+
+              <div
+                ref={containerRef}
                 className="relative w-full h-full flex items-center justify-center"
                 style={{
                   backgroundColor: hasBackgroundImage ? 'transparent' : design.backgroundColor,
@@ -340,7 +340,7 @@ export default function QRPreviewPanel({
               />
 
               {hasTextOverlay && design.textOverlay.position === 'front' && (
-                <div 
+                <div
                   className="absolute inset-0 flex items-center justify-center pointer-events-none"
                   style={textPreviewStyle}
                 >
@@ -359,7 +359,7 @@ export default function QRPreviewPanel({
                 {scannabilityInfo.label}
               </span>
             </div>
-            
+
             <div className="relative h-3 rounded-full overflow-hidden bg-surface-lighter">
               <div className="absolute inset-0 flex">
                 <div className="flex-1 bg-gradient-to-r from-red-500 to-red-400" />
@@ -368,8 +368,8 @@ export default function QRPreviewPanel({
                 <div className="flex-1 bg-gradient-to-r from-yellow-400 to-lime-400" />
                 <div className="flex-1 bg-gradient-to-r from-lime-400 to-green-500" />
               </div>
-              
-              <div 
+
+              <div
                 className="absolute top-1/2 -translate-y-1/2 -translate-x-1/2 transition-all duration-500 ease-out"
                 style={{ left: `${scannability}%` }}
               >
@@ -378,7 +378,7 @@ export default function QRPreviewPanel({
                 </div>
               </div>
             </div>
-            
+
             <div className="flex justify-between mt-1.5 px-1">
               <span className="text-[10px] text-text-muted">Low</span>
               <span className="text-[10px] text-text-muted">High</span>

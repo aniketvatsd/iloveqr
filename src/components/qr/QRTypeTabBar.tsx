@@ -2,13 +2,13 @@
 
 import { useRef, useState, useEffect } from 'react';
 import { QRType } from '@/types/qr';
-import { 
-  Link, 
-  AtSign, 
-  Phone, 
-  MessageSquare, 
-  Type, 
-  FileText, 
+import {
+  Link,
+  AtSign,
+  Phone,
+  MessageSquare,
+  Type,
+  FileText,
   Wifi,
   Instagram,
   Youtube,
@@ -90,10 +90,10 @@ export default function QRTypeTabBar({ selectedType, onTypeChange }: QRTypeTabBa
                 key={type.id}
                 onClick={() => onTypeChange(type.id)}
                 className={`
-                  flex flex-col items-center gap-2 px-5 py-3 rounded-xl
+                  relative flex flex-col items-center gap-2 px-5 py-3 rounded-xl
                   transition-all duration-200 whitespace-nowrap min-w-[100px]
-                  ${isSelected 
-                    ? 'text-primary' 
+                  ${isSelected
+                    ? 'text-primary'
                     : 'text-text-secondary hover:text-text-primary hover:bg-surface-light'
                   }
                 `}
@@ -103,7 +103,7 @@ export default function QRTypeTabBar({ selectedType, onTypeChange }: QRTypeTabBa
                   {type.label}
                 </span>
                 {isSelected && (
-                  <div className="absolute bottom-0 left-1/2 -translate-x-1/2 w-12 h-0.5 bg-primary rounded-full" />
+                  <div className="absolute -bottom-3 left-1/2 -translate-x-1/2 w-12 h-0.5 bg-primary rounded-full" />
                 )}
               </button>
             );

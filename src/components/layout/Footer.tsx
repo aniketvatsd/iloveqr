@@ -35,11 +35,6 @@ export default function Footer() {
                   Templates
                 </Link>
               </li>
-              <li>
-                <Link href="/generator" className="text-text-secondary hover:text-text-primary transition-colors text-sm">
-                  API Access
-                </Link>
-              </li>
             </ul>
           </div>
 
@@ -48,17 +43,17 @@ export default function Footer() {
             <h4 className="font-semibold text-text-primary mb-4">Company</h4>
             <ul className="space-y-2">
               <li>
-                <Link href="/" className="text-text-secondary hover:text-text-primary transition-colors text-sm">
+                <Link href="/about" className="text-text-secondary hover:text-text-primary transition-colors text-sm">
                   About Us
                 </Link>
               </li>
               <li>
-                <Link href="/" className="text-text-secondary hover:text-text-primary transition-colors text-sm">
+                <Link href="/privacy" className="text-text-secondary hover:text-text-primary transition-colors text-sm">
                   Privacy Policy
                 </Link>
               </li>
               <li>
-                <Link href="/" className="text-text-secondary hover:text-text-primary transition-colors text-sm">
+                <Link href="/terms" className="text-text-secondary hover:text-text-primary transition-colors text-sm">
                   Terms of Service
                 </Link>
               </li>
@@ -69,22 +64,22 @@ export default function Footer() {
           <div>
             <h4 className="font-semibold text-text-primary mb-4">Connect</h4>
             <div className="flex gap-3">
-              <a 
-                href="#" 
+              <a
+                href="#"
                 className="p-2 bg-surface-light hover:bg-surface-lighter rounded-lg transition-colors"
                 aria-label="Twitter"
               >
                 <Twitter className="w-5 h-5 text-text-secondary" />
               </a>
-              <a 
-                href="#" 
+              <a
+                href="#"
                 className="p-2 bg-surface-light hover:bg-surface-lighter rounded-lg transition-colors"
                 aria-label="GitHub"
               >
                 <Github className="w-5 h-5 text-text-secondary" />
               </a>
-              <a 
-                href="#" 
+              <a
+                href="#"
                 className="p-2 bg-surface-light hover:bg-surface-lighter rounded-lg transition-colors"
                 aria-label="LinkedIn"
               >
